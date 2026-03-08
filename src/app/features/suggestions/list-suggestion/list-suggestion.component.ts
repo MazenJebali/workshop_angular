@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Suggestion } from '../../models/suggestion';
+import { Suggestion } from '../../../models/suggestion';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-suggestion',
@@ -7,6 +8,10 @@ import { Suggestion } from '../../models/suggestion';
   styleUrl: './list-suggestion.component.css'
 })
 export class ListSuggestionComponent implements OnInit {
+  constructor(
+  private router: Router
+) {}
+
   suggestions: Suggestion[] = [
     {
     id: 1,
@@ -14,7 +19,7 @@ export class ListSuggestionComponent implements OnInit {
     description: "Suggestion pour organiser une journée de team building pour renforcer les liens entre les membres de l'équipe.",
     category: 'Événements',
     date: new Date('2025-01-20'),
-    status: 'acceptee',
+    status: 'ACCEPTÉE',
     nbLikes:10,
     isFavorite: false
     },
@@ -24,7 +29,7 @@ export class ListSuggestionComponent implements OnInit {
     description: 'Proposition pour améliorer la gestion des réservations en ligne avec un système de confirmation automatique.',
     category: 'Technologie',
     date: new Date('2025-01-15'),
-    status: 'refusee',
+    status: 'REFUSÉE',
     nbLikes:0,
     isFavorite: false
     },
@@ -34,7 +39,7 @@ export class ListSuggestionComponent implements OnInit {
     description: "Mise en place d'un programme de récompenses pour motiver les employés et reconnaître leurs efforts.",
     category: 'Ressources Humaines',
     date: new Date('2025-01-25'),
-    status: 'refusee',
+    status: 'REFUSÉE',
     nbLikes:0,
     isFavorite: false
     },
@@ -44,7 +49,7 @@ export class ListSuggestionComponent implements OnInit {
     description: "Refonte complète de l'interface utilisateur pour une meilleure expérience utilisateur.",
     category: 'Technologie',
     date: new Date('2025-01-30'),
-    status: 'en_attente',
+    status: 'EN_ATTENTE',
     nbLikes:0,
     isFavorite: false
     },
@@ -93,7 +98,7 @@ export class ListSuggestionComponent implements OnInit {
     switch (status) {
       case 'ACCEPTÉE':   return 'status-accepted';
       case 'REFUSÉE':    return 'status-refused';
-      case 'EN ATTENTE': return 'status-pending';
+      case 'EN_ATTENTE': return 'status-pending';
       default:           return '';
     }
   }
@@ -109,5 +114,11 @@ export class ListSuggestionComponent implements OnInit {
       default:              return 'cat-default';
     }
   }
+
+  viewDetail(suggestion: Suggestion): void {
+  this.router.navigate(['/suggestions', suggestion.id], {
+    state: { suggestions: this.suggestions }
+  });
+}
 
 }

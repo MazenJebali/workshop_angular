@@ -1,15 +1,4 @@
 <!-- suggestions-list.component.html -->
-<div class="page-wrapper">
-
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-brand">Campus Ideas</div>
-    <div class="navbar-links">
-      <a class="nav-link" routerLink="/accueil">Accueil</a>
-      <a class="nav-link active" routerLink="/suggestions">Suggestions</a>
-    </div>
-  </nav>
-
   <!-- Main Content -->
   <div class="container">
     <h2 class="page-title">Liste des suggestions</h2>
@@ -31,6 +20,7 @@
       <div
         class="suggestion-card"
         *ngFor="let suggestion of filteredSuggestions"
+        (click)="viewDetail(suggestion)" style="cursor:pointer"
       >
         <div class="card-header">
           <h3 class="card-title">{{ suggestion.title }}</h3>
@@ -38,7 +28,7 @@
             <span class="category-badge" [ngClass]="getCategoryClass(suggestion.category)">
               {{ suggestion.category }}
             </span>
-            <span class="card-date">{{ suggestion.date }}</span>
+            <span class="card-date">{{ suggestion.date.toLocaleDateString() }}</span>
           </div>
         </div>
 
@@ -51,24 +41,6 @@
           >
             {{ suggestion.status }}
           </span>
-
-          <!-- Like & Favoris buttons — hidden if status is REFUSÉE -->
-          <div class="card-actions" *ngIf="suggestion.status !== 'REFUSÉE'">
-            <button
-              class="btn btn-like"
-              (click)="likesuggestion(suggestion)"
-            >
-              👍 Like {{ suggestion.nbLikes }}
-            </button>
-            <button
-              class="btn btn-favoris"
-              [class.favorited]="suggestion.isFavorite"
-              (click)="addToFavoris(suggestion)"
-            >
-              <span>{{ suggestion.isFavorite ? '❤️' : '🤍' }}</span>
-              {{ suggestion.isFavorite ? 'Ajouté aux favoris' : 'Ajouter aux favoris' }}
-            </button>
-          </div>
         </div>
       </div>
 
@@ -78,4 +50,3 @@
       </div>
     </div>
   </div>
-</div>

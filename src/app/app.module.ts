@@ -6,10 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { ListSuggestionComponent } from './core/list-suggestion/list-suggestion.component';
+import { ListSuggestionComponent } from './features/suggestions/list-suggestion/list-suggestion.component';
 import { SuggestionComponent } from './core/suggestion/suggestion.component';
 import { DetailSuggestionComponent } from './core/detail-suggestion/detail-suggestion.component';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from './core/home/home.component';
+import { NotfoundComponent } from './core/notfound/notfound.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -18,16 +25,23 @@ import { RouterModule } from '@angular/router';
     FooterComponent,
     ListSuggestionComponent,
     SuggestionComponent,
-    DetailSuggestionComponent
+    DetailSuggestionComponent,
+    HomeComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

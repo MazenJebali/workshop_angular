@@ -4,7 +4,7 @@ export class Suggestion {
     description!: string;
     category!: string;
     date!: Date;
-    status!: string;
+    status!: 'ACCEPTÉE' | 'REFUSÉE' | 'EN_ATTENTE';
     nbLikes!: number;
     isFavorite!: boolean;
 }

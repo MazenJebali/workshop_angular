@@ -1,0 +1,61 @@
+<!-- detail-suggestion.component.html -->
+<div class="detail-wrapper" *ngIf="suggestion; else notFound">
+
+  <!-- Back button -->
+  <div class="back-bar">
+    <button class="btn-back" (click)="goBack()">
+      ← Retour aux suggestions
+    </button>
+  </div>
+
+  <!-- Card -->
+  <div class="detail-card">
+
+    <!-- Header -->
+    <div class="detail-header">
+      <div class="header-meta">
+        <span class="category-badge" [ngClass]="getCategoryClass(suggestion.category)">
+          {{ suggestion.category }}
+        </span>
+        <span class="detail-date">{{ suggestion.date | date: 'dd MMM yyyy' }}</span>
+      </div>
+      <h1 class="detail-title">{{ suggestion.title }}</h1>
+      <span class="status-badge" [ngClass]="getStatusClass(suggestion.status)">
+        {{ getStatusLabel(suggestion.status) }}
+      </span>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Description -->
+    <div class="detail-body">
+      <h3 class="section-label">Description</h3>
+      <p class="detail-description">{{ suggestion.description }}</p>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Footer actions -->
+    <div class="detail-footer">
+      <button class="btn btn-like" (click)="like()">
+        👍 Like <span class="like-count">{{ suggestion.nbLikes }}</span>
+      </button>
+      <button
+        class="btn btn-favoris"
+        [class.favorited]="suggestion.isFavorite"
+        (click)="toggleFavoris()"
+      >
+        {{ suggestion.isFavorite ? '❤️ Ajouté aux favoris' : '🤍 Ajouter aux favoris' }}
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Not found fallback -->
+<ng-template #notFound>
+  <div class="not-found">
+    <p>Suggestion introuvable.</p>
+    <button class="btn-back" (click)="goBack()">← Retour</button>
+  </div>
+</ng-template>
